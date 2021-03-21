@@ -1,0 +1,64 @@
+import { Component } from 'react';
+import { v4 as genId } from 'uuid';
+import PropTypes from 'prop-types';
+
+class ContactForm extends Component {
+  state = { name: '', number: '' };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
+  };
+
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.currentTarget;
+    const currentState = this.state;
+    const updateState = { [name]: value };
+    this.setState({ ...currentState, ...updateState });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.state);
+    this.reset();
+  };
+
+  render() {
+    const nameInputId = genId();
+    const telInputId = genId();
+
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor={nameInputId}>
+          Name
+          <input
+            type="text"
+            name="name"
+            id={nameInputId}
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+        </label>
+
+        <label htmlFor={telInputId}>
+          Number
+          <input
+            type="tel"
+            name="number"
+            id={telInputId}
+            value={this.state.number}
+            onChange={this.handleChange}
+          />
+        </label>
+        <button type="submit">Add contact</button>
+      </form>
+    );
+  }
+}
+
+ContactForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+};
+
+export default ContactForm;
