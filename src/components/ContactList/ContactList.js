@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import ContactListItem from './ContactListItem/ContactListItem';
 import PropTypes from 'prop-types';
+import styles from './ContactList.module.css';
 
 class ContactList extends Component {
   render() {
@@ -16,6 +17,7 @@ class ContactList extends Component {
               key={id}
               id={id}
               onDeleteContact={onDeleteContact}
+              className={styles.contactList}
             />
           );
         })}

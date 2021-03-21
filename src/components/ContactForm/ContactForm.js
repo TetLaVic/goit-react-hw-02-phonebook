@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { v4 as genId } from 'uuid';
 import PropTypes from 'prop-types';
+import styles from './ContactForm.module.css';
 
 class ContactForm extends Component {
   state = { name: '', number: '' };
@@ -28,8 +29,8 @@ class ContactForm extends Component {
     const telInputId = genId();
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={nameInputId}>
+      <form onSubmit={this.handleSubmit} className={styles.contactForm}>
+        <label htmlFor={nameInputId} className={styles.labelForm}>
           Name
           <input
             type="text"
@@ -37,10 +38,11 @@ class ContactForm extends Component {
             id={nameInputId}
             value={this.state.name}
             onChange={this.handleChange}
+            className={styles.inputForm}
           />
         </label>
 
-        <label htmlFor={telInputId}>
+        <label htmlFor={telInputId} className={styles.labelForm}>
           Number
           <input
             type="tel"
@@ -48,9 +50,12 @@ class ContactForm extends Component {
             id={telInputId}
             value={this.state.number}
             onChange={this.handleChange}
+            className={styles.inputForm}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={styles.buttonForm}>
+          Add contact
+        </button>
       </form>
     );
   }
